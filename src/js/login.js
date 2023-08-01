@@ -15,7 +15,7 @@ document.getElementById('login-form').addEventListener('submit', async event => 
         const data = await response.json();
         alert('Logged in successfully');
         // You can redirect user to another page after successful login
-        // window.location.href = '/somepage.html';
+        window.location.href = '/index.html';
     } else {
         alert('Failed to log in');
     }
