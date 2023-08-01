@@ -1,19 +1,20 @@
 // Local Application Library
 import Gpt from './chatGPT.js';
+// import Login from './login.js';
 
 
 // Loading Library
 import { LoadingWithMask, closeLoadingWithMask } from './loading.js';
+
+
+// DOM 로그인
+const loginButton = document.getElementById('login-button');
 
 // DOM 요소(질문 가이드)
 const $radioButtons = document.querySelectorAll("input[type='radio']");
 // DOM 요소를 변수에 지정
 const $input = document.querySelector('input');
 const $form = document.querySelector('form');
-const $videoList = document.querySelector('#videoList');
-
-// 인스턴스 변수 지정
-const InstancePlayer = new videoPlayer();
 
 // youtubeIFramePlayer에 YT가 완전히 호출되도록 해결하는 함수.
 const ytReady = new Promise(function (resolve) {
@@ -51,10 +52,10 @@ $form.addEventListener('submit', async e => {
     // GPT 질문 정의 + 목적이 없을(빈 칸)경우 default값 주기
     let question;
     if ($textField) {
-        question = `${selectedYears}에 인기있던 '${$textField}'에 맞는 감성적인 팝송 리스트 추천 해줘`;
+        question = `${selectedYears}에 인기있던 '${$textField}'에 맞는 감성적인 팝송 리스트 10개 추천 해줘`;
     }
     else {
-        question = `${selectedYears}에 인기있던 "새벽에 듣기 좋은"에 맞는 감성적인 팝송 리스트 추천 해줘`;
+        question = `${selectedYears}에 인기있던 "새벽에 듣기 좋은"에 맞는 감성적인 팝송 리스트 10개 추천 해줘`;
     }
 
 

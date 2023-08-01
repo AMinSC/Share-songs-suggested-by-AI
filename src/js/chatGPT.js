@@ -9,12 +9,12 @@ class Gpt {
         this.$chatList = $chatList;
         this.question = question
 
-        this.openAIUrl = `https://estsoft-openai-api.jejucodingcamp.workers.dev/`;
+        this.openAIUrl = `https://www.s3a1.com/chatbot/`;
 
         this.data = [
             {
                 "role": "system",
-                "content": "assistant는 노래 전문가이다."
+                "prompt": "assistant는 팝송노래 전문가이다."
             },
         ];
 
@@ -33,11 +33,11 @@ class Gpt {
         if (question) {
             this.data.push({
                 role: "user",
-                content: question,
+                prompt: question,
             });
             this.questionData.push({
                 role: "user",
-                content: question,
+                prompt: question,
             });
         }
     }
@@ -56,7 +56,6 @@ class Gpt {
         li.innerText = answer;
         this.$chatList.appendChild(li);
     }
-    
     /**
      * api 요청보내는 함수
      * api key 노출을 방지하기 위해, Netlify 서버리스 기능을 활용
@@ -70,15 +69,15 @@ class Gpt {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(this.data),
-                redirect: "follow",
+                redirect: "follow"
             });
                 const result = await response.json();
-                this.answer = result.choices[0].message.content;
+                this.answer = result.conversation[1].prompt;
                 this.answerRender(this.answer);
             } catch (err) {
                 console.log(err);
         }
-        return this.answer.split('\n').slice(2, 12)  // 예외 처리 필요
+        //return this.answer.split('\n').slice(2, 12)  // 예외 처리 필요
     }
 }
 
