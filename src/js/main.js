@@ -7,9 +7,6 @@ import Gpt from './chatGPT.js';
 import { LoadingWithMask, closeLoadingWithMask } from './loading.js';
 
 
-// DOM 로그인
-const loginButton = document.getElementById('login-button');
-
 // DOM 요소(질문 가이드)
 const $radioButtons = document.querySelectorAll("input[type='radio']");
 // DOM 요소를 변수에 지정
@@ -64,3 +61,58 @@ $form.addEventListener('submit', async e => {
     const answer = await InstanceGpt.apiPost();
     closeLoadingWithMask();
 });
+
+
+
+// 로그인 상태 확인
+function checkLoginStatus() {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+        // 로그인된 상태임, 로그인 버튼을 숨기고 로그아웃 버튼을 보여줌
+        loginButton.style.display = 'none';
+        logoutButton.style.display = 'block';
+    } else {
+        // 로그인되지 않은 상태임, 로그아웃 버튼을 숨기고 로그인 버튼을 보여줌
+        logoutButton.style.display = 'none';
+        loginButton.style.display = 'block';
+    }
+}
+
+// 로그인 버튼과 로그아웃 버튼을 가져옴
+const loginButton = document.getElementById('login-button');
+const logoutButton = document.getElementById('logout-button');
+
+// 버튼에 이벤트 핸들러 설정
+loginButton.onclick = checkLoginStatus;
+logoutButton.onclick = function() {
+    localStorage.removeItem('token');
+    checkLoginStatus();
+}
+
+// 페이지 로드시 로그인 상태 확인
+checkLoginStatus();
+
+document.getElementById('login-form').addEventListener('submit', async event => {
+    event.preventDefault();
+
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    const response = await fetch('https://www.s3a1.com/user/login/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem('token', data.token);  // 토큰을 로컬 스토리지에 저장
+        alert('Logged in successfully');
+        // 로그인 성공 후 다른 페이지로 리다이렉트
+        window.location.href = '/index.html';
+    } else {
+        alert('Failed to log in');
+    }
+});
+
