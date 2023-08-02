@@ -15,9 +15,22 @@ document.getElementById('login-form').addEventListener('submit', async event => 
         const data = await response.json();
         localStorage.setItem('token', data.token);
         alert('Logged in successfully');
+        console.log(response)
         // You can redirect user to another page after successful login
         window.location.href = '/index.html';
     } else {
-        alert('Failed to log in');
+        const errorData = await response.json(); // the response body contains the error messages
+        let errorMessage = 'Failed to log in'; // default error message
+
+        // DRF validation errors are typically nested under the field name, but this might vary
+        if (errorData.username) {
+            errorMessage = errorData.username.join(' ');
+        } else if (errorData.password) {
+            errorMessage = errorData.password.join(' ');
+        } else if (errorData.non_field_errors) { // non_field_errors is a common key for non-specific field errors
+            errorMessage = errorData.non_field_errors.join(' ');
+        }
+
+        alert(errorMessage);
     }
 });
