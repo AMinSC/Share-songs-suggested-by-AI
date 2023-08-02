@@ -11,6 +11,7 @@ import { LoadingWithMask, closeLoadingWithMask } from './loading.js';
 const loginButton = document.getElementById('login-button');
 const logoutButton = document.getElementById('logout-button');
 const registerButton = document.getElementById('register-button');
+const playerlist = document.getElementById('player-list')
 
 // DOM 요소(질문 가이드)
 const $radioButtons = document.querySelectorAll("input[type='radio']");
@@ -28,10 +29,12 @@ const ytReady = new Promise(function (resolve) {
 
 // 안내 문구
 // main.js
+
 window.showAlert = function(event) {
     event.preventDefault();
     alert('준비 중입니다 :)');
 }
+
 const playerListLink = document.querySelector('.menu');
 playerListLink.addEventListener('click', showAlert);
 
@@ -88,11 +91,16 @@ function checkLoginStatus() {
 }
 
 // set event handler on button
-loginButton.onclick = checkLoginStatus;
-logoutButton.onclick = function() {
+function logoutUser() {
+    // remove the token and check login status
     localStorage.removeItem('token');
     checkLoginStatus();
 }
+
+
+loginButton.onclick = checkLoginStatus;
+logoutButton.onclick = logoutUser;
+playerlist.onclick = window.showAlert;
 
 // check login status on page load
 checkLoginStatus();
