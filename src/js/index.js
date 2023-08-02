@@ -45,3 +45,34 @@ playerlist.onclick = window.showAlert;
 
 // check login status on page load
 checkLoginStatus();
+
+
+
+// 사용자가 로그인했는지 확인
+// 사용자가 로그인했는지 여부를 결정하는 로직을 구현해야 합니다.
+if (checkLoginStatus()) {
+    const token = localStorage.getItem('token');
+
+    axios.get('https://www.s3a1.com/user/conversations/', {
+        headers: { 'Authorization': `Bearer ${token}` }  // 헤더에 토큰 포함
+    })
+        .then(response => {
+        const conversationsDiv = document.getElementById('conversations-list');
+        const conversations = response.data;
+
+        conversations.forEach(conversation => {
+            // 대화 데이터의 구조에 따라 이 부분을 조정해야 할 수 있습니다.
+            const conversationDiv = document.createElement('div');
+            conversationDiv.innerHTML = `
+                <p>질문: ${conversation.prompt}</p>
+                <p>응답: ${conversation.response}</p>
+                <a href="conversations/${conversation.id}/">자세히 보기</a>
+            `;
+
+            conversationsDiv.appendChild(conversationDiv);
+        });
+    })
+    .catch(error => {
+    console.error('대화를 가져오는 중 오류 발생:', error);
+    });
+}

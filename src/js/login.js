@@ -13,7 +13,8 @@ document.getElementById('login-form').addEventListener('submit', async event => 
 
     if (response.ok) {
         const data = await response.json();
-        localStorage.setItem('token', data.token);
+        localStorage.setItem('token', data.access);
+        localStorage.setItem('userId', data.userId);
         alert('Logged in successfully');
         // You can redirect user to another page after successful login
         window.location.href = '/index.html';

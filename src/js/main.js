@@ -64,7 +64,8 @@ $form.addEventListener('submit', async e => {
 
 
     // GPT 인스턴스 변수 생성
-    const InstanceGpt = new Gpt(document.querySelector('#answerPoint'), question);
+    const userId = localStorage.getItem('userId');
+    const InstanceGpt = new Gpt(document.querySelector('#answerPoint'), question, userId);
     const answer = await InstanceGpt.apiPost();
     closeLoadingWithMask();
 });
