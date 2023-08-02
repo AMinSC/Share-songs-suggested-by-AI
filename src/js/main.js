@@ -1,6 +1,5 @@
 // Local Application Library
 import Gpt from './chatGPT.js';
-// import Login from './login.js';
 
 
 // Loading Library
@@ -11,7 +10,7 @@ import { LoadingWithMask, closeLoadingWithMask } from './loading.js';
 const loginButton = document.getElementById('login-button');
 const logoutButton = document.getElementById('logout-button');
 const registerButton = document.getElementById('register-button');
-const playerlist = document.getElementById('player-list')
+const playerlist = document.getElementById('player-list');
 
 // DOM 요소(질문 가이드)
 const $radioButtons = document.querySelectorAll("input[type='radio']");
@@ -71,7 +70,6 @@ $form.addEventListener('submit', async e => {
 });
 
 
-
 // 로그인 상태 확인
 // 페이지 로드시 로그인 상태 확인
 function checkLoginStatus() {
@@ -95,6 +93,7 @@ function logoutUser() {
     // remove the token and check login status
     localStorage.removeItem('token');
     checkLoginStatus();
+    window.location.href = '/index.html';
 }
 
 
