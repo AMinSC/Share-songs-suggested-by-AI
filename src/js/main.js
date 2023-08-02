@@ -10,6 +10,7 @@ import { LoadingWithMask, closeLoadingWithMask } from './loading.js';
 // get the login button and logout button
 const loginButton = document.getElementById('login-button');
 const logoutButton = document.getElementById('logout-button');
+const registerButton = document.getElementById('register-button');
 
 // DOM 요소(질문 가이드)
 const $radioButtons = document.querySelectorAll("input[type='radio']");
@@ -76,11 +77,13 @@ function checkLoginStatus() {
     if (token) {
         // We are logged in, hide the login button and show the logout button
         loginButton.style.display = 'none';
+        registerButton.style.display = 'none';
         logoutButton.style.display = 'block';
     } else {
         // Not logged in, hide the logout button and show the login button
         logoutButton.style.display = 'none';
         loginButton.style.display = 'block';
+        registerButton.style.display = 'block';
     }
 }
 

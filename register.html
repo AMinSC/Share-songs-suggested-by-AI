@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI-Suggested-Playlist</title>
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="./src/css/main.css">
+    <link rel="stylesheet" href="./src/css/loading.css">
+
+    <!-- JS -->
+</head>
+<body>
+    <header>
+        <h1>Emotional pop song recommendation</h1>
+        <nav>
+            <ul>
+                <li><a class="menu" href="index.html">Home</a></li>
+                <li><a class="menu" href="#">Player List</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="register">
+        <form id="register-form">
+            <!-- 'username', 'email', 'password', 'nickname' -->
+            <label for="email">email:</label>
+            <input type="text" id="email" name="email" required>
+
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+    
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="nickname">nickname:</label>
+            <input type="text" id="nickname" name="nickname" required>
+    
+            <input type="submit" value="Login">
+        </form>
+    </div>
+
+    <!-- Add your JavaScript here -->
+    <script src="./src/js/register.js"></script>
+</body>
+</html>
