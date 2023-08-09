@@ -75,18 +75,18 @@ class Gpt {
                     prompt: conversation.prompt,
                 })),
             };
-            console.log(requestBody)
             const response = await fetch(this.openAIUrl, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Token ${token}`
+                    "Authorization": `Bearer ${token}`,
+                    // "userId": userId,
                 },
                 body: JSON.stringify(requestBody),
                 redirect: "follow"
             });
                 const result = await response.json();
-                this.answer = result.conversation[1].prompt;
+                this.answer = result.conversation[2].prompt;
                 this.answerRender(this.answer);
             } catch (err) {
                 console.log(err);
